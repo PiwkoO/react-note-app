@@ -1,20 +1,15 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import Button from 'components/atoms/Button/Button';
+import { theme } from 'theme/MainTheme';
 import GlobalStyle from 'theme/GlobalStyle';
-
-const theme = {
-  primary: 'black',
-};
+import Card from 'components/molecules/Card/Card';
 
 const Root = () => (
   <div>
     <GlobalStyle />
     <ThemeProvider theme={theme}>
       <>
-        <h1>Hello, world!</h1>
-        <Button>Close / Save</Button>
-        <Button secondary>Remove</Button>
+        <Card />
       </>
     </ThemeProvider>
   </div>
