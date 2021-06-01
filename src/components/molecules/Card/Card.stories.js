@@ -1,9 +1,15 @@
 import React from 'react';
-import Card from './Card';
+import CardComponent from './Card';
 
 export default {
   title: 'Molecules/Card',
-  component: Card,
+  component: CardComponent,
+  argTypes: {
+    cardType: {
+      options: ['note', 'twitter', 'article'],
+      control: { type: 'select' },
+    },
+  },
 };
 
-export const Normal = () => <Card />;
+export const Card = ({ cardType }) => <CardComponent cardType={cardType} />;
