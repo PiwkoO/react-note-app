@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import bulbIcon from 'assets/icons/bulb.svg';
@@ -14,7 +13,7 @@ const YellowBackground = styled.div`
   align-items: center;
   width: 500px;
   height: 500px;
-  background-color: ${({ theme }) => theme.primary};
+  background-color: ${({ theme }) => theme.note};
 `;
 
 export default {
@@ -27,9 +26,6 @@ export default {
       </YellowBackground>
     ),
   ],
-  args: {
-    active: false,
-  },
   argTypes: {
     active: {
       control: 'boolean',
@@ -37,22 +33,12 @@ export default {
   },
 };
 
-export const Bulb = ({ active }) => (
-  <ButtonIcon active={active} icon={bulbIcon} />
-);
+export const Bulb = (args) => <ButtonIcon {...args} icon={bulbIcon} />;
 
-export const Logout = ({ active }) => (
-  <ButtonIcon active={active} icon={logoutIcon} />
-);
+export const Logout = (args) => <ButtonIcon {...args} icon={logoutIcon} />;
 
-export const Pen = ({ active }) => (
-  <ButtonIcon active={active} icon={penIcon} />
-);
+export const Pen = (args) => <ButtonIcon {...args} icon={penIcon} />;
 
-export const Plus = ({ active }) => (
-  <ButtonIcon active={active} icon={plusIcon} />
-);
+export const Plus = (args) => <ButtonIcon {...args} icon={plusIcon} />;
 
-export const Twitter = ({ active }) => (
-  <ButtonIcon active={active} icon={twitterIcon} />
-);
+export const Twitter = (args) => <ButtonIcon {...args} icon={twitterIcon} />;
