@@ -5,10 +5,10 @@ const Button = styled.button`
   border-radius: 50px;
   width: 220px;
   height: 47px;
-  background-color: ${({ theme }) => theme.primary};
+  background-color: ${({ theme }) => theme.note};
   font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: ${({ theme }) => theme.bold};
+  font-size: ${({ theme }) => theme.fontSize.s};
   text-transform: uppercase;
 
   ${({ secondary }) =>
@@ -17,10 +17,8 @@ const Button = styled.button`
       width: 105px;
       height: 30px;
       background-color: ${({ theme }) => theme.grey200};
-      font-size: 10px;
+      font-size: ${({ theme }) => theme.fontSize.xxs};
     `}
 `;
 
 export default Button;
-
-// background-color: #ffd82b;
