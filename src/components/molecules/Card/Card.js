@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import Heading from 'components/atoms/Heading/Heading';
@@ -18,7 +19,7 @@ const StyledWrapper = styled.div`
 
 const InnerWrapper = styled.div`
   position: relative;
-  padding: 17px 30px;
+  padding: 17px 70px 17px 30px;
   background-color: ${({ activeColor, theme }) =>
     activeColor ? theme[activeColor] : 'white'};
 
@@ -49,7 +50,7 @@ const StyledAvatar = styled.img`
   position: absolute;
   top: 25px;
   right: 25px;
-  border: 5px solid ${({ theme }) => theme.twitter};
+  border: 5px solid ${({ theme }) => theme.twitters};
   border-radius: 50%;
   width: 86px;
   height: 86px;
@@ -69,34 +70,53 @@ const StyledLinkedButton = styled.a`
   transform: translateY(-50%);
 `;
 
-const Card = ({ cardType }) => (
-  <StyledWrapper>
-    <InnerWrapper activeColor={cardType}>
-      <StyledHeading>Hello, world!</StyledHeading>
-      <DateInfo>3 days ago</DateInfo>
-      {cardType === 'twitter' && (
-        <StyledAvatar src="https://pbs.twimg.com/profile_images/1104491562854158336/A-NTwQhW_400x400.png" />
-      )}
-      {cardType === 'article' && (
-        <StyledLinkedButton href="https://youtube.com/helloroman" />
-      )}
-    </InnerWrapper>
-    <InnerWrapper flex>
-      <Paragraph>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga voluptas
-        ab iusto ad in pariatur officia architecto illo! Ratione, quidem!
-      </Paragraph>
-      <Button secondary>Remove</Button>
-    </InnerWrapper>
-  </StyledWrapper>
-);
+class Card extends React.Component {
+  state = {
+    redirect: false,
+  };
 
-export default Card;
+  handleCardClick = () => this.setState({ redirect: true });
+
+  render() {
+    const { cardType, id, title, created, twitterName, articleUrl, content } =
+      this.props;
+    const { redirect } = this.state;
+
+    if (redirect) {
+      return <Redirect to={`/${cardType}/${id}`} />;
+    }
+
+    return (
+      <StyledWrapper onClick={this.handleCardClick}>
+        <InnerWrapper activeColor={cardType}>
+          <StyledHeading>{title}</StyledHeading>
+          <DateInfo>{created}</DateInfo>
+          {cardType === 'twitters' && <StyledAvatar src={twitterName} />}
+          {cardType === 'articles' && <StyledLinkedButton href={articleUrl} />}
+        </InnerWrapper>
+        <InnerWrapper flex>
+          <Paragraph>{content}</Paragraph>
+          <Button secondary>Remove</Button>
+        </InnerWrapper>
+      </StyledWrapper>
+    );
+  }
+}
 
 Card.propTypes = {
-  cardType: PropTypes.oneOf(['note', 'twitter', 'article']),
+  id: PropTypes.number.isRequired,
+  cardType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
+  title: PropTypes.string.isRequired,
+  created: PropTypes.string.isRequired,
+  twitterName: PropTypes.string,
+  articleUrl: PropTypes.string,
+  content: PropTypes.string.isRequired,
 };
 
 Card.defaultProps = {
-  cardType: 'note',
+  cardType: 'notes',
+  twitterName: null,
+  articleUrl: null,
 };
+
+export default Card;
