@@ -1,48 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import GridTemplate from 'templates/GridTemplate';
 import Card from 'components/molecules/Card/Card';
 
-const twitters = [
-  {
-    id: 1,
-    title: 'Hello Roman',
-    content:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-    created: '1 day',
-    twitterName:
-      'https://pbs.twimg.com/profile_images/1104491562854158336/A-NTwQhW_400x400.png',
-  },
-  {
-    id: 2,
-    title: 'Redux guy',
-    content:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-    created: '1 day',
-    twitterName:
-      'https://pbs.twimg.com/profile_images/1336281436685541376/fRSl8uJP_400x400.jpg',
-  },
-  {
-    id: 3,
-    title: 'React router stuff',
-    content:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-    created: '5 days',
-    twitterName:
-      'https://pbs.twimg.com/profile_images/1095819845382299649/zG-2_UHS_400x400.jpg',
-  },
-  {
-    id: 4,
-    title: 'Super animacje!',
-    content:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-    created: '10 days',
-    twitterName:
-      'https://pbs.twimg.com/profile_images/1281071936605323266/wc1KRZLK_400x400.jpg',
-  },
-];
-
-const Twitters = () => (
-  <GridTemplate pageType="twitters">
+const Twitters = ({ twitters }) => (
+  <GridTemplate pageType="twitters" length={twitters.length}>
     {twitters.map(({ id, title, content, created, twitterName }) => (
       <Card
         cardType="twitters"
@@ -57,4 +20,19 @@ const Twitters = () => (
   </GridTemplate>
 );
 
-export default Twitters;
+Twitters.pageTypes = {
+  twitters: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      cardType: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      twitterName: PropTypes.string.isRequired,
+      created: PropTypes.string.isRequired,
+    })
+  ),
+};
+
+const mapStateToProps = ({ twitters }) => ({ twitters });
+
+export default connect(mapStateToProps)(Twitters);
