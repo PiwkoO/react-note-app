@@ -1,23 +1,29 @@
 import styled, { css } from 'styled-components';
 
 const Button = styled.button`
-  border: none;
-  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+  padding: 0;
+  background-color: ${({ activeColor, theme }) => theme[activeColor]};
   width: 220px;
   height: 47px;
-  background-color: ${({ theme }) => theme.note};
-  font-family: 'Montserrat', sans-serif;
-  font-weight: ${({ theme }) => theme.bold};
+  border: none;
+  border-radius: 50px;
+  font-family: 'Montserrat';
+  font-weight: 600;
   font-size: ${({ theme }) => theme.fontSize.s};
   text-transform: uppercase;
 
   ${({ secondary }) =>
     secondary &&
     css`
-      width: 105px;
-      height: 30px;
       background-color: ${({ theme }) => theme.grey200};
       font-size: ${({ theme }) => theme.fontSize.xxs};
+      width: 105px;
+      height: 30px;
     `}
 `;
 
