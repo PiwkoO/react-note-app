@@ -72,12 +72,7 @@ const DetailsTemplate = ({
       {pageType === 'articles' && (
         <StyledLink href={articleUrl}>Open article</StyledLink>
       )}
-      {pageType === 'twitters' && (
-        <StyledImage
-          alt={title}
-          src={`https://avatars.io/twitter/${twitterName}`}
-        />
-      )}
+      {pageType === 'twitters' && <StyledImage alt={title} src={twitterName} />}
       <Button as={Link} to={`/${pageType}`} activeColor={pageType}>
         save / close
       </Button>

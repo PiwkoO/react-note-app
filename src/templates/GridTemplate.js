@@ -1,13 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import UserPageTemplate from 'templates/UserPageTemplate';
 import Input from 'components/atoms/Input/Input';
 import Heading from 'components/atoms/Heading/Heading';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
-import UserPageTemplate from './UserPageTemplate';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
+`;
+
+const StyledGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 85px;
+
+  @media (max-width: 1500px) {
+    grid-gap: 45px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 1100px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const StyledPageHeader = styled.div`
@@ -27,13 +42,7 @@ const StyledParagraph = styled(Paragraph)`
   font-weight: ${({ theme }) => theme.bold};
 `;
 
-const StyledGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 85px;
-`;
-
-const GridTemplate = ({ children, pageType }) => (
+const GridTemplate = ({ children, pageType, length }) => (
   <UserPageTemplate pageType={pageType}>
     <StyledWrapper>
       <StyledPageHeader>
@@ -41,7 +50,9 @@ const GridTemplate = ({ children, pageType }) => (
         <StyledHeading big as="h1">
           {pageType}
         </StyledHeading>
-        <StyledParagraph>6 {pageType}</StyledParagraph>
+        <StyledParagraph>
+          {length} {pageType}
+        </StyledParagraph>
       </StyledPageHeader>
       <StyledGrid>{children}</StyledGrid>
     </StyledWrapper>
