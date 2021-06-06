@@ -5,8 +5,12 @@ import UserPageTemplate from 'templates/UserPageTemplate';
 import Input from 'components/atoms/Input/Input';
 import Heading from 'components/atoms/Heading/Heading';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
+import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
+import plusIcon from 'assets/icons/plus.svg';
+import withContext from 'hoc/withContext';
 
 const StyledWrapper = styled.div`
+  position: relative;
   padding: 25px 150px 25px 70px;
 `;
 
@@ -42,30 +46,40 @@ const StyledParagraph = styled(Paragraph)`
   font-weight: ${({ theme }) => theme.bold};
 `;
 
-const GridTemplate = ({ children, pageType, length }) => (
-  <UserPageTemplate pageType={pageType}>
+const StyledButtonIcon = styled(ButtonIcon)`
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  border-radius: 50%;
+  background-color: ${({ activeColor, theme }) => theme[activeColor]};
+  background-size: 35%;
+`;
+
+const GridTemplate = ({ children, length, pageContext }) => (
+  <UserPageTemplate>
     <StyledWrapper>
       <StyledPageHeader>
         <Input search placeholder="Search" />
         <StyledHeading big as="h1">
-          {pageType}
+          {pageContext}
         </StyledHeading>
         <StyledParagraph>
-          {length} {pageType}
+          {length} {pageContext}
         </StyledParagraph>
       </StyledPageHeader>
       <StyledGrid>{children}</StyledGrid>
+      <StyledButtonIcon icon={plusIcon} activeColor={pageContext} />
     </StyledWrapper>
   </UserPageTemplate>
 );
 
 GridTemplate.propTypes = {
   children: PropTypes.node.isRequired,
-  pageType: PropTypes.oneOf(['notes', 'twitters', 'articles']),
+  pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']),
 };
 
 GridTemplate.defaultProps = {
-  pageType: 'notes',
+  pageContext: 'notes',
 };
 
-export default GridTemplate;
+export default withContext(GridTemplate);

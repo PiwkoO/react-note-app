@@ -32,16 +32,14 @@ class DetailsPage extends React.Component {
       title: 'Wake me up when Vue ends',
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      twitterName: 'hello_roman',
+      twitterName:
+        'https://pbs.twimg.com/profile_images/1104491562854158336/A-NTwQhW_400x400.png',
       articleUrl: 'https://youtube.com/helloroman',
       created: '1 day',
     };
 
-    const { pageType } = this.state;
-
     return (
       <DetailsTemplate
-        pageType={pageType}
         title={dummyArticle.title}
         created={dummyArticle.created}
         content={dummyArticle.content}
