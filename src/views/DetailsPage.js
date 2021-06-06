@@ -28,7 +28,7 @@ class DetailsPage extends React.Component {
 
   render() {
     const dummyArticle = {
-      id: 1,
+      id: '1',
       title: 'Wake me up when Vue ends',
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
