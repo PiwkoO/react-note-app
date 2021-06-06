@@ -31,11 +31,13 @@
       "wesbos"
     ],
     "rules": {
-      "import/no-unresolved": 1,
-      "import/no-absolute-path": 1,
-      "react/prop-types": 1,
-      "react/state-in-constructor": 1,
-      "react/destructuring-assignment": 1
+      "import/no-unresolved": 0,
+      "import/no-absolute-path": 0,
+      "react/prop-types": 0,
+      "react/state-in-constructor": 0,
+      "react/destructuring-assignment": 0,
+      "react/no-unused-state": 0,
+      "react/jsx-props-no-spreading": 0
     },
     "settings": {
       "import/resolver": {
